@@ -283,3 +283,73 @@ Notice the two {% block %} statements, one for the title and the next for the co
 
 ### Create the shelter list template
 
+We'll now create another template for listing all shelters. We'll loop through the list of shelters and create links to details for all shelters.
+
+In dog_shelters/templates, create a new file named shelter_list.html.
+
+Add the following code to create the template for our shelter list:
+
+```HTML
+{% extends 'base.html' %}
+
+{% block title %}
+Shelter list
+{% endblock %}
+
+{% block content %}
+<h2>Shelter list</h2>
+<div>Here is the list of registered shelters</div>
+    {% for shelter in shelters %}
+        <div>
+            <a href="{% url 'shelter_detail' shelter.id %}">
+                {{shelter.name}}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+```
+
+We use the block tags to indicate where we want our information to be placed. We specify a title value of Shelter list, and the content items will be the list of all shelters.
+
+We're also using a new tag, url. The url tag generates a URL dynamically. Our URLs are registered in our URLconf, so they can potentially change. By using the url tag, we can tell Django to retrieve the appropriate URL from the URLconf rather than hard-coding in a path.
+
+The url tag looks for the name of the path, shelter_detail in our case, and then the list of any expected parameters. shelter_detail has one parameter, pk. That's the primary key, or ID, of the shelter. We specify the ID by using shelter.id.
+
+### Create the shelter detail template
+
+With our list template created, we can now create the detail template.
+
+In dog_shelters/templates, create a new file called shelter_detail.html.
+
+Add the following code to create the template:
+
+```HTML
+{% extends 'base.html' %}
+
+{% block title %}
+Shelter list
+{% endblock %}
+
+{% block content %}
+<h2>{{ shelter.name }}</h2>
+<div>Located in {{ shelter.location }}</div>
+{% if shelter.dog_set.all %}
+    <div>Here is the list of available dogs</div>
+    {% for dog in shelter.dog_set.all %}
+        <div>
+            <a href="">
+                {{dog.name}}
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <div>This shelter has no dogs available for adoption</div>
+{% endif %}
+{% endblock %}
+```
+
+Notice that in the body, we check to see if any dogs are inside the shelter by using if shelter.dog_set.all. If there are dogs, we display the list by using for to loop through all the dogs. Otherwise, we display a message that says no dogs are available. We'll update the link in a later unit.
+
+You might notice that we're making two calls to shelter.dog_set.all. If you're experienced with databases and ORMs, you might be concerned that we're making two calls to the database. Two calls would normally be a performance hit. Django has built-in caching, which will ensure that only one call to the database is made.
