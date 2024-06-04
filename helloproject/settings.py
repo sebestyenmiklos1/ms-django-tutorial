@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello_world.apps.HelloWorldConfig",
-    "dog_shelters.apps.DogSheltersConfig"
+    "dog_shelters.apps.DogSheltersConfig",
+    "crispy_forms",
+    "crispy_bootstrap4"
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

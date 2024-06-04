@@ -1,7 +1,30 @@
 from django.shortcuts import render, get_object_or_404
 from . import models
+from django.views import generic
 
-# Create your views here.
+class DogDetailView(generic.DetailView):
+    model = models.Dog
+    template_name = 'dog_detail.html'
+    context_object_name = 'dog'
+
+
+class ShelterListView(generic.ListView):
+    template_name = 'shelter_list.html'
+    context_object_name = 'shelters'
+
+    def get_queryset(self):
+        return models.Shelter.objects.all()
+    
+class DogCreateView(generic.CreateView):
+    model = models.Dog
+    template_name = 'dog_form.html'
+    fields = ['name', 'description', 'shelter']
+
+class DogUpdateView(generic.CreateView):
+    model = models.Dog
+    template_name = 'dog_form.html'
+    fields = ['name', 'description', 'shelter']
+
 def shelter_list(request):
     shelters = models.Shelter.objects.all()
     context = { 'shelters': shelters }
