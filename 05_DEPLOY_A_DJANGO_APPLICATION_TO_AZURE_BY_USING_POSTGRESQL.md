@@ -201,3 +201,48 @@ When you followed the steps to clone the starter repository, you should have als
 1.Screenshot showing the deployment configuration option.
 
 If you miss the notification to deploy the app or you close the notification, you can also deploy by finding the App Service you created, right-click it, and select Deploy to Web App.
+
+## Create the database server
+
+Now create the PostgreSQL database.
+
+1. Install Azure Databases extensions in VSCode
+1. On the RESOURCES bar of the Azure extension, hover, and select the + (plus sign) icon to create a resource.
+1. Screenshot of the Databases extension, showing the Create Server icon.
+1. If prompted to choose a subscription, choose your Azure subscription.
+1. Select Create Database Server....
+1. Screenshot showing how to create a new database server.
+1. For the Azure Database Server, select PostgreSQL Flexible Server.
+1. Screenshot showing a list of available database servers.
+1. Enter a unique name for your database server.
+1. Important: Make a note of the name you use for your database server.
+1. Select the Postgres SKU and options.
+1. For the name of the admin user, enter shelter_admin.
+1. Enter a secure password, such as "86i^z5#emSk6wu3t10nC*".
+1. Important: When you create the password, don't use a dollar sign ($). This symbol can cause issues for connections from Python. Make a note of the password you use.
+1. Enter the password a second time to confirm it.
+1. For the resource group, select the same resource group that your web app was created in.
+1. To find the resource group name and location used to create the web app, find the App Service in the Azure extension, right-click the name, and select View Properties. In the "id" key the resource group name is the part following "/resourceGroups/". The "location" key shows the location. You can also right-click the name of the App Service and select Open in Portal to find the resource group name and location.
+1. For the location for new resources, select the same location of the resource group and web app. Important: When you create multiple Azure resources that will communicate with one another, always place them in the same region. This collocation ensures the best performance.
+
+Your server will now be created! This process will take a few minutes.
+
+## Create a database firewall rule to allow access from your dev environment
+
+After the database is created, you need to create a firewall rule to allow your developer environment to access the database. Wait until the database exists before following the next steps to create the rule.
+
+1. Open the Visual Studio Code command palette with F1 or the key combination Ctrl + Shift + P.
+1. Search for "PostgreSQL: Configure Firewall" and select it.
+1. Screenshot: showing the firewall rule field. "Skip for now" is highlighted.
+1. When prompted for the resource to apply the firewall to, select the Postgres database you created.
+1. A final dialog box asks to continue and shows the IP address it will add. Select Yes.
+
+It takes a few minutes to add the rule. Watch the VS Code notification window for status.
+
+## Create a database on the database server
+
+Now that you've configured App Service and created the server, you can create the database in the Postgres Database Server.
+
+1. In the RESOURCES of the Azure Tools extension, expand the PostgreSQL Servers (Flexible) node and find the server you created.
+1. Right-click the name of your database server and select Create Database.
+1. Enter shelters.
