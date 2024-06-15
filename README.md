@@ -4,14 +4,14 @@ Create and activate virtual environment:
 
 ```BASH
 # Windows
-python -m venv django-tutorial-env
-.\\django-tutorial-env\\Scripts\\Activate
-pip install -r requirements.txt
+python -m venv .django-tutorial-env
+.\\.django-tutorial-env\\Scripts\\Activate
+pip install -r src/requirements.txt
 
 # macOS or Linux
-python3 -m venv django-tutorial-env
-source ./django-tutorial-env/bin/activate
-pip install -r requirements.txt
+python3 -m venv .django-tutorial-env
+source ./.django-tutorial-env/bin/activate
+pip install -r src/requirements.txt
 ```
 
 ## Create a project with Django-admin
@@ -25,7 +25,7 @@ The trailing period at the end of the command is important. It instructs django-
 ## Run the project
 
 ```BASH
-python manage.py runserver
+python src/manage.py runserver
 ```
 
 ## Create app and register with project

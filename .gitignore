@@ -1,5 +1,6 @@
-django-tutorial-env/
+.django-tutorial-env/
 .env
+.vscode
 env
 __pycache__/
 db*

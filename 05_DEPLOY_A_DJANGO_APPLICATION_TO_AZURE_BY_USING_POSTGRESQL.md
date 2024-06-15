@@ -245,4 +245,37 @@ Now that you've configured App Service and created the server, you can create th
 
 1. In the RESOURCES of the Azure Tools extension, expand the PostgreSQL Servers (Flexible) node and find the server you created.
 1. Right-click the name of your database server and select Create Database.
-1. Enter shelters.
+1. Select the Networking resource of the Postgres Server.
+2. Select Allow public access from any Azure service within Azure to this server option in the portal from the Networking tab and select Save.
+
+## Configure application settings for the web app
+
+App Service uses the application settings to configure environmental variables. Settings are a convenient way to store information you shouldn't put in your code, such as database connection strings.
+
+1. Under App Service, expand the sandbox subscription. Then expand your application.
+1. To create the first application setting, right-click Application Settings and then select Add New Setting.
+1. Screenshot showing how to add a new setting.
+1. In the first field, enter the name DBUSER.
+1. In the second field, enter the value shelter_admin.
+1. Repeat the preceding steps to create the remaining settings:
+
+| Name | Value |
+| --- | --- |
+| DBHOST | The server name you created previously |
+| DBPASS | The password you created previously |
+| DBUSER | shelter_admin |
+| DBNAME | shelters |
+| SECRET_KEY | Generate a secure password |
+
+NOTE:
+
+## Create the schema and superuser
+
+The last step in the deployment is to set up the database. In local development, you run python manage.py migrate and python manage.py createsuperuser to create the database schema and superuser. On Azure, you'll do the same.
+
+You'll connect to the web server in Azure by using Secure Shell (SSH). You can make the connection in Visual Studio Code as shown below.
+
+1. In the App Service extension, right-click your app service and then select SSH into Web App.
+2. An SSH connection will be made to your web server in Azure. This process might take a few minutes. A terminal pane appears in Visual Studio Code. This terminal is the SSH connection to your web server. If you have trouble connecting, [see the troubleshooting steps](https://learn.microsoft.com/en-us/training/modules/django-deployment/6-deploy-azure#troubleshooting-ssh) below.
+3. 
+
